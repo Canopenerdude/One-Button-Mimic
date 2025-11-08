@@ -208,8 +208,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.10199024, y: 0.69909567, z: -0.10180621, w: -0.7003561}
-  m_LocalPosition: {x: 2.3640156, y: 1.5718155, z: 0.021085717}
+  m_LocalRotation: {x: -0.10199023, y: 0.6990957, z: -0.1018062, w: -0.7003562}
+  m_LocalPosition: {x: 2.3640156, y: 1.5718155, z: 0.02108574}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -494,12 +494,12 @@ GameObject:
   - component: {fileID: 699346337}
   - component: {fileID: 699346336}
   - component: {fileID: 699346335}
+  - component: {fileID: 699346338}
   - component: {fileID: 699346334}
   - component: {fileID: 699346333}
-  - component: {fileID: 699346338}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -629,7 +629,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4abb2c4f6770440b688b7db2ceb71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  movin: 0
+  rotatin: 0
+  inspected: 0
+  isMimic: 0
+  waitOver: 0
+  speed: 0.005
+  rotateSpeed: 0.9
+  waitTime: 15
+  mimic: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
