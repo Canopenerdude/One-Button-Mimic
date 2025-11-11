@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class objMove : MonoBehaviour
 {
     private Rigidbody _rb;
+    [SerializeField] private GameObject _obj;
 
     public bool movin;
     public bool rotatin;
@@ -16,12 +18,17 @@ public class objMove : MonoBehaviour
     public float rotateSpeed;
     public float waitTime;
 
-    public GameObject mimic;
+    private int _rInt;
+    private string _rString;
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
-        _rb = GetComponent<Rigidbody>();
+        Random r = new Random();
+        _rInt = r.Next(1, 15);
+        _rString = _rInt.ToString();
+        _obj = GameObject.Find("Object"+_rString);
+        _rb = _obj.GetComponent<Rigidbody>();
         movin = true;
         rotatin = false;
         isMimic = false;
@@ -37,7 +44,6 @@ public class objMove : MonoBehaviour
         {
             waitTime = 15f;
         }
-        mimic = GameObject.FindGameObjectWithTag("mimic");
     }
 
     // Update is called once per frame
@@ -70,7 +76,11 @@ public class objMove : MonoBehaviour
 
         if (isMimic)
         {
-            Destroy(mimic);
+            //Play animation, then do the below
+            _rb.transform.position = new Vector3(5, 5, -35);
+            //Need a way to disappear the object after it is inspected, if it is not a mimic.
+            //Also need a way to call a new object to come in after an object disappears- whether mimic or not.
+            //Also to teleport the objects to the right spot
         }
     }
 
