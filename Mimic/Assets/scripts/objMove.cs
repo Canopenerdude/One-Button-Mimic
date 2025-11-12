@@ -25,7 +25,7 @@ public class objMove : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         Random r = new Random();
-        _rInt = r.Next(1, 15);
+        _rInt = r.Next(1, 1);
         _rString = _rInt.ToString();
         _obj = GameObject.Find("Object"+_rString);
         _rb = _obj.GetComponent<Rigidbody>();
