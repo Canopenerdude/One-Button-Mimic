@@ -14,6 +14,7 @@ public class objMove : MonoBehaviour
     public bool inspected;
     public bool isMimic;
     public bool waitOver;
+    public bool needNewObj;
     public float speed;
     public float rotateSpeed;
     public float waitTime;
@@ -24,11 +25,7 @@ public class objMove : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-        Random r = new Random();
-        _rInt = r.Next(1, 1);
-        _rString = _rInt.ToString();
-        _obj = GameObject.Find("Object"+_rString);
-        _rb = _obj.GetComponent<Rigidbody>();
+        needNewObj = true;
         movin = true;
         rotatin = false;
         isMimic = false;
@@ -78,9 +75,20 @@ public class objMove : MonoBehaviour
         {
             //Play animation, then do the below
             _rb.transform.position = new Vector3(5, 5, -35);
-            //Need a way to disappear the object after it is inspected, if it is not a mimic.
+            needNewObj = true;
+        }
+
+        if (needNewObj)
+        {
             //Also need a way to call a new object to come in after an object disappears- whether mimic or not.
+            Random r = new Random();
+            _rInt = r.Next(1, 15);
+            _rString = _rInt.ToString();
+            _obj = GameObject.Find("Object"+_rString);
+            _rb = _obj.GetComponent<Rigidbody>();
             //Also to teleport the objects to the right spot
+            _rb.transform.position = new Vector3(0, 0, 1);
+            needNewObj = false;
         }
     }
 
@@ -94,6 +102,10 @@ public class objMove : MonoBehaviour
         _rb.transform.rotation = Quaternion.Euler(0, 0, 0);
         movin = true;
         inspected = true;
+        //Need a way to disappear the object after it is inspected, if it is not a mimic.
+        yield return new WaitForSeconds(1.5f);
+        _rb.transform.position = new Vector3(5, 5, -35);
+        needNewObj = true;
     }
 
     private IEnumerator Waiting()
