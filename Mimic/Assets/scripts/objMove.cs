@@ -39,7 +39,7 @@ public class objMove : MonoBehaviour
         }
         if (waitTime == 0)
         {
-            waitTime = 15f;
+            waitTime = 10f;
         }
     }
 
