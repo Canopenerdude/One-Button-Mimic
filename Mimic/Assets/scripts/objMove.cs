@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 public class objMove : MonoBehaviour
@@ -19,11 +20,12 @@ public class objMove : MonoBehaviour
     public float rotateSpeed;
     public float waitTime;
     public int score;
+    private int _jankCount;
 
     private int _rInt;
     private string _rString;
 
-    private Vector3 _prevPos;
+    public Vector3 _prevPos;
 
     public GameObject fire;
     // Start is called before the first frame update
@@ -71,22 +73,20 @@ public class objMove : MonoBehaviour
         {
             _rb.transform.position += new Vector3(0, 0, 1f) * speed;
         }
-        else
-        {
-            rotatin = true;
-        }
 
-        if (rotatin)
+        if (rotatin && !isMimic)
         {
             _prevPos = _rb.transform.position;
             _rb.transform.position = new Vector3(2.13f, 1.64f, 0.53f);
             _rb.transform.Rotate(0, rotateSpeed, 0);
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && movin && !inspected)
+        if (Input.GetKeyDown(KeyCode.Space) && movin && !inspected)
         {
-            StartCoroutine(Inspect());
-            StartCoroutine(Waiting());
+            movin = false;
+            rotatin = true;
+            // StartCoroutine(Inspect());
+            // StartCoroutine(Waiting());
         }
 
         if (Input.GetKeyUp(KeyCode.Space) && rotatin)
@@ -96,7 +96,14 @@ public class objMove : MonoBehaviour
 
         if (isMimic)
         {
-            StartCoroutine(Fire());
+            // StartCoroutine(Fire());
+            _rb.transform.position = new Vector3(5, 5, -35);
+            isMimic = false;
+            rotatin = false;
+            inspected = true;
+            needNewObj = true;
+            score++;
+            movin = true;
         }
 
         if (_rb.transform.position.z > 5.9f)
@@ -107,7 +114,7 @@ public class objMove : MonoBehaviour
 
         if (score >= 15)
         {
-            //GoToWinScreen
+            SceneManager.LoadScene("END");
         }
     }
 
@@ -116,7 +123,7 @@ public class objMove : MonoBehaviour
         movin = false;
         yield return new WaitForSeconds(.5f);
         rotatin = true;
-        yield return new WaitWhile(() => !waitOver);
+        yield return new WaitForSeconds(waitTime);
         rotatin = false;
         _rb.transform.rotation = Quaternion.Euler(0, 0, 0);
         _rb.transform.position = _prevPos;
@@ -135,11 +142,8 @@ public class objMove : MonoBehaviour
     {
         fire.transform.position = new Vector3(2.52f, 5.87f, .57f);
         yield return new WaitForSeconds(2);
-        _rb.transform.position = new Vector3(5, 5, -35);
+        
         fire.transform.position = new Vector3(2.52f, 10.28f, .57f);
-        needNewObj = true;
-        isMimic = false;
-        inspected = true;
-        score++;
+        
     }
 }

@@ -1224,10 +1224,11 @@ MonoBehaviour:
   isMimic: 0
   waitOver: 0
   needNewObj: 0
-  speed: 0.009
-  rotateSpeed: 0.5
+  speed: 0.015
+  rotateSpeed: 0.9
   waitTime: 10
   score: 0
+  _prevPos: {x: 0, y: 0, z: 0}
   fire: {fileID: 827752093}
 --- !u!1 &421252176
 GameObject:
@@ -1636,7 +1637,7 @@ Transform:
   m_GameObject: {fileID: 699346332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.13, y: 0.37, z: 5.92}
+  m_LocalPosition: {x: -0.13, y: 0.48, z: 0.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
